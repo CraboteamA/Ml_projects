@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3 class="mb-4 fw-bold">Analytics</h3>
+
+<div class="grid-dashboard">
+  <div class="card p-3"><div id="line-roll" style="height:320px"></div></div>
+  <div class="card p-3"><div id="scatter-sleep-mood" style="height:320px"></div></div>
+  <div class="card p-3"><div id="scatter-mood-activity" style="height:320px"></div></div>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock %}

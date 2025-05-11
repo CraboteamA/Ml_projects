@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3 class="fw-bold mb-4">History</h3>
+
+<div class="card p-3">
+  <div class="table-responsive">
+    <table class="table table-sm table-dark align-middle">
+      <thead>
+        <tr>
+          <th>Date</th><th>Sleep h</th><th>Mood</th><th>Weight kg</th>
+          <th>Workout min</th><th>Code min</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td>{{ row.day }}</td>
+          <td>{{ row.sleep_hours or "" }}</td>
+          <td>{{ row.mood or "" }}</td>
+          <td>{{ row.weight_kg or "" }}</td>
+          <td>{{ row.workouts_min or "" }}</td>
+          <td>{{ row.code_min or "" }}</td>
+          <td>
+            <!-- link passes ?day=YYYY‑MM‑DD so index.html pre‑fills -->
+            <a href="{{ url_for('index') }}?day={{ row.day }}" class="btn btn-sm btn-accent">
+              Edit
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

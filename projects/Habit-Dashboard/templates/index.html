@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h3 class="mb-4 fw-bold">Daily Entry</h3>
+
+<div class="grid-dashboard">
+    <!-- ---- FORM CARD ---- -->
+    <div class="card p-4">
+        <form method="post">
+          <div class="row g-3">
+            <!-- DATE -->
+            <div class="col-md-6">
+              <label class="form-label">Date</label>
+              <input type="date" name="day" class="form-control"
+                     value="{{ last_row.day if last_row else '' }}">
+            </div>
+      
+            <!-- SLEEP -->
+            <div class="col-md-6">
+              <label class="form-label">Sleep h</label>
+              <input type="number" step="0.1" name="sleep_hours" class="form-control"
+                     placeholder="e.g. 7.5" value="{{ last_row.sleep_hours or '' }}">
+            </div>
+      
+            <!-- MOOD -->
+            <div class="col-md-6">
+              <label class="form-label">Mood (1‑5)</label>
+              <input type="number" min="1" max="5" name="mood" class="form-control"
+                     placeholder="1 bad – 5 great" value="{{ last_row.mood or '' }}">
+            </div>
+      
+            <!-- WEIGHT -->
+            <div class="col-md-6">
+              <label class="form-label">Weight kg</label>
+              <input type="number" step="0.1" name="weight_kg" class="form-control"
+                     placeholder="kg" value="{{ last_row.weight_kg or '' }}">
+            </div>
+      
+            <!-- WORKOUT -->
+            <div class="col-md-6">
+              <label class="form-label">Workout min</label>
+              <input type="number" name="workouts_min" class="form-control"
+                     placeholder="0" value="{{ last_row.workouts_min or '' }}">
+            </div>
+      
+            <!-- CODE -->
+            <div class="col-md-6">
+              <label class="form-label">Code min</label>
+              <input type="number" name="code_min" class="form-control"
+                     placeholder="0" value="{{ last_row.code_min or '' }}">
+            </div>
+      
+            <!-- BUTTON -->
+            <div class="col-12">
+              <button class="btn btn-accent w-100 fw-semibold">Save / Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    <hr>
+    <!-- ---- STREAK CARD ---- -->
+    <div class="card p-4 text-center d-flex flex-column justify-content-center">
+        <h5 class="fw-bold mb-3">Current Streaks</h5>
+        <p class="fs-3 mb-1">🏋️ {{ streaks.workouts }} <small class="text-secondary">days</small></p>
+        <p class="fs-3">💻 {{ streaks.code }} <small class="text-secondary">days</small></p>
+      </div>
+      
+
+     <!-- ---- NAV CARD ---- -->
+     <div class="card p-4 d-flex flex-column justify-content-center text-center">
+        <h5 class="mb-3">Dashboards</h5>
+        <a href="{{ url_for('charts') }}" class="btn btn-accent">Open →</a>
+      </div>
+</div>
+{% block scripts %}<script src="{{ url_for('static', filename='js/entry.js') }}"></script>{% endblock %}
+{% endblock %}
